@@ -1,4 +1,4 @@
-package estructuras;
+package com.estructuras;
 import javax.swing.JOptionPane;
 public class Pila {
     private Nodo cima;
