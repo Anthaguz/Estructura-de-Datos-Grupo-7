@@ -16,8 +16,12 @@ public class Nodo {
     public void setDocumento(Documento documento) {this.documento = documento;}
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Constructores">
-    public Nodo() {
-        this.siguiente = null;
-    }
+    public Nodo() {}
+    
+    
     //</editor-fold>
+
+    public Nodo(Documento documento) {
+        this.documento = documento;
+    }
 }

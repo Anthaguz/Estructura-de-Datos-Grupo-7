@@ -7,6 +7,8 @@ import com.googolplex.Googolplex;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import javax.swing.JOptionPane;
 
 /**
@@ -168,8 +170,16 @@ public class Create_Doc extends javax.swing.JFrame {
 
     private void crear_doc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_doc1ActionPerformed
         // TODO add your handling code here:
-//        File archivo=Googolplex.programa.leerArchivoExistente();
-//        Googolplex.programa.;        
+        
+        File archivo=Googolplex.programa.leerArchivoExistente();
+        File destino = new File(Googolplex.programa.getPathRelativoDelPrograma()+Googolplex.programa.getPathRelativoDeLosDocumentos()+archivo.getName());
+        try {
+            Files.copy(archivo.toPath(), destino.toPath());
+            Googolplex.programa.documentoExistente(archivo.getName());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error: El documento ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }        
     }//GEN-LAST:event_crear_doc1ActionPerformed
 
     /**

@@ -38,7 +38,9 @@ public class Cola {
         return temp;
     }
     
-    public void encolar(Nodo elemento){
+    //<editor-fold defaultstate="collapsed" desc="Añadir nodos en diferentes posiciones">
+    public void encolar(Documento documento){
+        Nodo elemento=new Nodo(documento);
         if(frente==null){
             frente = elemento;
             ultimo = elemento;
@@ -47,6 +49,16 @@ public class Cola {
             ultimo=elemento;
         }
     }
+
+    /*Se encarga de empujar los nodos actuales hacia atras, poniendo el nuevo
+    *nodo en la primera posicion.
+    */
+    public void ponerAlFrente(Documento documento){
+        Nodo nuevoFrente=new Nodo(documento);
+        nuevoFrente.setSiguiente(frente);
+        frente=nuevoFrente;
+    }
+    //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Buscadores">
     
@@ -111,7 +123,7 @@ public class Cola {
         }
         return extraido;
     }
-    
+      
     
 //    public String imprimirCola(){
 //        String respuesta="";
@@ -129,13 +141,7 @@ public class Cola {
 
 //    
 //    /*
-//    *Se encarga de empujar los nodos actuales hacia atras, poniendo el nuevo
-//    *nodo en la primera posicion.
-//    */
-//    public void ponerAlFrente(Nodo nuevoFrente){
-//        nuevoFrente.setSiguiente(frente);
-//        frente=nuevoFrente;
-//    }
+
 //    
 //    
 //    public int atenderPrimero(){
