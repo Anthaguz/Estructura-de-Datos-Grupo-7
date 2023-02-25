@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUI;
+import com.googolplex.Googolplex;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -38,6 +39,7 @@ public class Create_Doc extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         file_name = new javax.swing.JTextField();
+        crear_doc1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,24 +54,28 @@ public class Create_Doc extends javax.swing.JFrame {
             }
         });
 
-        ext_doc.setBackground(new java.awt.Color(255, 255, 255));
         ext_doc.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        ext_doc.setForeground(new java.awt.Color(0, 0, 0));
         ext_doc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { ".TXT", " " }));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Elegir el tipo de archivo para crear");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Elegir el nombre del archivo");
 
-        file_name.setBackground(new java.awt.Color(255, 255, 255));
         file_name.setToolTipText("");
         file_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 file_nameActionPerformed(evt);
+            }
+        });
+
+        crear_doc1.setBackground(new java.awt.Color(0, 0, 0));
+        crear_doc1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        crear_doc1.setText("Añadir existente");
+        crear_doc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crear_doc1ActionPerformed(evt);
             }
         });
 
@@ -80,15 +86,15 @@ public class Create_Doc extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(134, 134, 134)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(file_name, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(crear_doc)
-                        .addContainerGap(153, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(file_name, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(crear_doc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(crear_doc1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(111, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +120,9 @@ public class Create_Doc extends javax.swing.JFrame {
                 .addComponent(file_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(crear_doc)
-                .addGap(62, 62, 62))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(crear_doc1)
+                .addGap(32, 32, 32))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -157,6 +165,12 @@ public class Create_Doc extends javax.swing.JFrame {
     private void file_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_file_nameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_file_nameActionPerformed
+
+    private void crear_doc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_doc1ActionPerformed
+        // TODO add your handling code here:
+//        File archivo=Googolplex.programa.leerArchivoExistente();
+//        Googolplex.programa.;        
+    }//GEN-LAST:event_crear_doc1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +217,7 @@ public class Create_Doc extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton crear_doc;
+    private javax.swing.JButton crear_doc1;
     private javax.swing.JComboBox<String> ext_doc;
     private javax.swing.JTextField file_name;
     private javax.swing.JLabel jLabel1;

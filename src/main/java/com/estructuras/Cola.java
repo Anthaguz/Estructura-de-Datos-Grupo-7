@@ -1,25 +1,32 @@
 package com.estructuras;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class Cola {
     //<editor-fold defaultstate="collapsed" desc="Declaracion de variables">
     private Nodo frente;
     private Nodo ultimo;
+    private int cantidadDeDocumentos;
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Getters">
     public Nodo getFrente() {return frente;}
     public Nodo getUltimo() {return ultimo;}
+    public int getCantidadDeDocumentos() {return cantidadDeDocumentos;}
+    
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Setters">
     public void setFrente(Nodo frente) {this.frente = frente;}
     public void setUltimo(Nodo ultimo) {this.ultimo = ultimo;}
+    public void setCantidadDeDocumentos(int cantidadDeDocumentos) {this.cantidadDeDocumentos = cantidadDeDocumentos;}
+    
     //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Constructores">
-    public void queue(Nodo elemento){
-        if (frente== null) {
-            frente=elemento;
-            ultimo=elemento;
-        }
-    }
+                                   
     //</editor-fold>
     
     public Nodo atender(){
@@ -31,7 +38,7 @@ public class Cola {
         return temp;
     }
     
-    public void encolarSinOrden(Nodo elemento){
+    public void encolar(Nodo elemento){
         if(frente==null){
             frente = elemento;
             ultimo = elemento;
@@ -39,6 +46,70 @@ public class Cola {
             ultimo.setSiguiente(elemento);
             ultimo=elemento;
         }
+    }
+    
+    //<editor-fold defaultstate="collapsed" desc="Buscadores">
+    
+    //retorna el documento con el nombre buscado
+    public Documento encontrarPorNombre(String buscador){
+        Documento resultado = null;
+        Nodo temp = frente;
+        while (temp!=null){
+            if(buscador.equals(temp.getDocumento().getNombre())){resultado=temp.getDocumento();}
+            temp=temp.getSiguiente();
+        }
+        return resultado;
+    }  
+    
+    //retorna el documento con el ID buscado
+    public Documento encontrarPorNumeroDeDocumento(int numeroDeDocumento){
+        Documento resultado = null;
+        Nodo temp = frente;
+        while (temp!=null){
+            if(numeroDeDocumento==temp.getDocumento().getNumeroDeDocumento()){resultado=temp.getDocumento();}
+            temp=temp.getSiguiente();
+        }
+        return resultado;
+    }
+    
+    //retorna una lista de documentos que calcen con la fecha buscada
+    public List<Documento> encontrarPorFechaDeIngreso(Date buscador){
+        List<Documento> resultado=new ArrayList<Documento>();
+        Nodo temp = frente;
+        int diferenciaDeFechas=0;
+        while (temp!=null){
+            diferenciaDeFechas=buscador.compareTo(temp.getDocumento().getFechaAdicion());
+            if (diferenciaDeFechas == 0) {
+                resultado.add(temp.getDocumento());
+            }
+            temp=temp.getSiguiente();
+        }
+        return resultado;
+    }
+    //</editor-fold>
+    
+    public boolean esVacia(){
+        if (frente==null){return true;}
+        return false;
+    }
+    
+    public Documento extraer(int numeroDeDocumento){
+        if(esVacia()){return null;}
+        Documento extraido=null;
+        Nodo temp=frente.getSiguiente();
+        Nodo anterior=frente;
+        if (anterior.getDocumento().getNumeroDeDocumento()==numeroDeDocumento){
+            extraido= anterior.getDocumento();
+        }
+        while (temp !=null){
+            if(extraido!=null){break;}
+            if(temp.getDocumento().getNumeroDeDocumento()==numeroDeDocumento){
+                extraido= temp.getDocumento();
+            }
+            anterior=temp;
+            temp=temp.getSiguiente();
+        }
+        return extraido;
     }
     
     
@@ -51,45 +122,11 @@ public class Cola {
 //        }
 //        return respuesta;
 //    }
+//      
 //    
-//    public boolean encuentra(int x){
-//        boolean found = false;
-//        Nodo temp = frente;
-//        while (temp!=null){
-//            if(x==temp.getDocumento()){return true;}
-//            temp=temp.getSiguiente();
-//        }
-//        return false;
-//    }    
+
 //    
-//    public void extraer(int x){
-//        if(frente==null){return;}
-//        boolean cambios=false;
-//        Nodo temp=frente.getSiguiente();
-//        Nodo anterior=frente;
-//        if (anterior.getDocumento()==x){
-//            anterior=temp;
-//            frente=temp;
-//            temp=temp.getSiguiente();            
-//            cambios=true;
-//        }
-//        while (temp !=null){
-//            if(temp.getDocumento()==x){
-//                anterior.setSiguiente(temp.getSiguiente());
-//                cambios=true;
-//            }
-//            anterior=temp;
-//            temp=temp.getSiguiente();
-//        }
-//        if (cambios){System.out.println(imprimirCola());}
-//        else {System.out.println(imprimirCola());
-//        System.out.println("\nNo hubieron cambios"); }
-//    }
-//    
-//    public boolean esVacia(){
-//        if (frente==null){return true;}
-//        return false;
-//    }
+
 //    
 //    /*
 //    *Se encarga de empujar los nodos actuales hacia atras, poniendo el nuevo
