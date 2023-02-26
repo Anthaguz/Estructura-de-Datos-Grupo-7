@@ -160,8 +160,6 @@ public class Create_Doc extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-
     }//GEN-LAST:event_crear_docActionPerformed
 
     private void file_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_file_nameActionPerformed

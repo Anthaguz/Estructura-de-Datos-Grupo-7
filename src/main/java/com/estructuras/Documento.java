@@ -67,6 +67,6 @@ public class Documento {
 
     @Override
     public String toString() {
-        return numeroDeDocumento + "," + nombre + "," + fechaAdicion;
+        return numeroDeDocumento + "," + nombre + "," + fechaAdicion +","+horaAdicion;
     }
 }
