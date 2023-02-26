@@ -1,5 +1,8 @@
 package com.estructuras;
-import javax.swing.JOptionPane;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Pila {
     private Nodo cima;
     
@@ -36,19 +39,93 @@ public class Pila {
         }
     }
     
-    public void imprimirPila(){
-        String respuesta= "";
-        if(!esVacia()){
-            Nodo aux = cima;
-            while (aux !=null){
-                respuesta = respuesta + "\n" + aux.getDocumento();
-                aux=aux.getSiguiente();
+    public void apilar(Documento d){
+        Nodo nuevo = new Nodo();
+        nuevo.setDocumento(d);
+        if (esVacia()) {cima=nuevo;}
+        else {
+            nuevo.setSiguiente(cima);
+            cima = nuevo;
+        }
+    }
+    
+//    public void imprimirPila(){
+//        String respuesta= "";
+//        if(!esVacia()){
+//            Nodo aux = cima;
+//            while (aux !=null){
+//                respuesta = respuesta + "\n" + aux.getDocumento();
+//                aux=aux.getSiguiente();
+//            }
+//        }
+//        respuesta = respuesta + "\n-null-"; 
+//        System.out.println(respuesta);
+//    }
+    
+    //<editor-fold defaultstate="collapsed" desc="Ordenar de mayor a menor">
+
+    public void insertarOrdenadoMayorAMenor(Pila pila, Documento cima)  
+    {  
+        if (pila.esVacia() || cima.getNumeroDeBusquedas() > pila.cima.getDocumento().getNumeroDeBusquedas())  
+        {  
+            pila.apilar(cima);  
+            return;  
+        }  
+        Documento temp = pila.extraer();  
+        insertarOrdenadoMayorAMenor(pila, cima);   
+        pila.apilar(temp);  
+    }  
+    
+    public void ordenarPilaMayorAMenor(Pila pila)  
+    {  
+        if (pila.esVacia()) {return;}  
+        Documento temp = pila.extraer();   
+        ordenarPilaMayorAMenor(pila);  
+        insertarOrdenadoMayorAMenor(pila, temp);  
+    }  
+    
+    public Documento extraer(){
+        Documento x=cima.getDocumento();
+        cima=cima.getSiguiente();
+        return x;
+    }
+    //</editor-fold>
+    
+    public List<String[]> imprimirPila(){
+        List<String[]> respuesta=new ArrayList<>();
+        Nodo temp = cima;
+        while (temp!=null){
+            String contenidoDeNodo=temp.toString();
+            String[] tostring=contenidoDeNodo.split(",");
+            respuesta.add(tostring);
+            temp=temp.getSiguiente();
+        }
+        return respuesta;
+    }
+    
+    public Pila encontrarTodoDocumentoQueCalce(String buscador){
+        Pila resultado = new Pila();
+        Nodo aux=cima;
+        while(aux!=null){
+            if(aux.getDocumento().getNombre().contains(buscador)){
+                resultado.apilar(aux.getDocumento());
+            }
+            aux=aux.getSiguiente();
+        }
+        resultado.ordenarPilaMayorAMenor(resultado);
+        return resultado;
+    }
+    
+    public void incrementarNumeroDeBusquedas(int id){
+        Nodo temp=cima;
+        while (temp!=null){
+            if(temp.getDocumento().getNumeroDeDocumento()!=id){temp=temp.getSiguiente();}
+            else{
+                temp.getDocumento().setNumeroDeBusquedas(temp.getDocumento().getNumeroDeBusquedas()+1);
             }
         }
-        respuesta = respuesta + "\n-null-"; 
-        System.out.println(respuesta);
     }
-
+    
 //    public boolean encontrarNumero(int numero){
 //        if(esVacia()){return false;}
 //        Nodo aux = cima;
@@ -87,31 +164,9 @@ public class Pila {
 //    }
 //    
 //
-//    public void insertarOrdenadoMayorAMenor(Pila pila, int cima)  
-//    {  
-//        if (pila.esVacia() || cima > pila.cima.getDocumento().getNumero())  
-//        {  
-//            pila.apilar(cima);  
-//            return;  
-//        }  
-//        int temp = pila.extraer();  
-//        insertarOrdenadoMayorAMenor(pila, cima);   
-//        pila.apilar(temp);  
-//    }  
+
 //    
-//    public void ordenarPilaMayorAMenor(Pila pila)  
-//    {  
-//        if (pila.esVacia()) {return;}  
-//        int temp = pila.extraer();   
-//        ordenarPilaMayorAMenor(pila);  
-//        insertarOrdenadoMayorAMenor(pila, temp);  
-//    }  
-//    
-//    int extraer(){
-//        int x=cima.getDocumento().getNumero();
-//        cima=cima.getSiguiente();
-//        return x;
-//    }
+
 //    
 //    public void insertarOrdenadoMenorAMayor(Pila pila, int cima)  
 //    {  

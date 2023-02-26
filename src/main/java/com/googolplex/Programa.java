@@ -4,9 +4,10 @@
  */
 package com.googolplex;
 
-import GUI.Create_Doc;
+import GUI.VentanaPrincipal;
 import com.estructuras.Cola;
 import com.estructuras.Documento;
+import com.estructuras.Pila;
 import java.io.BufferedReader;
 import javax.swing.JFileChooser;
 import java.io.File;
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
  public class Programa {
     //<editor-fold defaultstate="collapsed" desc="Declaracion de variables">
     private Cola documentosRegistrados;
+    private Pila documentosMasBuscados;
     private final String pathRelativoDelPrograma;
     private final String pathRelativoDeLosDocumentos;    
     private final String pathDeRegistros;    
@@ -32,6 +34,8 @@ import javax.swing.JOptionPane;
     public String getPathRelativoDelPrograma(){return pathRelativoDelPrograma;}
     public String getPathRelativoDeLosDocumentos() {return pathRelativoDeLosDocumentos;}
     public String getPathDeRegistros() {return pathDeRegistros;}
+    public Cola getDocumentosRegistrados() {return documentosRegistrados;}
+    public Pila getDocumentosMasBuscados() {return documentosMasBuscados;}
     
     //</editor-fold>
     
@@ -121,12 +125,18 @@ import javax.swing.JOptionPane;
     }
     //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Metodo para popular la tabla">
+    public List<String[]> popularTabla(){
+        return documentosRegistrados.imprimirCola();
+    }
+    //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Metodo principal donde corre todo el programa">
     public void run(){
         inicializadorDeRecursos("ArchivosRegistrados.txt");
         inicializadorDeRecursos("ConsecutivoDeArchivos.txt");
         inicializadorDeVariables();
-        Create_Doc createDOC = new Create_Doc();
+        VentanaPrincipal createDOC = new VentanaPrincipal();
         createDOC.interfazG();
     }
     //</editor-fold>
@@ -167,13 +177,16 @@ import javax.swing.JOptionPane;
             while ((linea = reader.readLine()) != null) {
                 String[] documentos = linea.split(",");
                 Date fecha= formatoFecha.parse(documentos[2]+" "+documentos[3]);
-                documentosRegistrados.encolar(new Documento(Integer.parseInt(documentos[0]),documentos[1],fecha));
+                documentosRegistrados.encolar(new Documento(Integer.parseInt(documentos[0]),documentos[1],fecha,Integer.parseInt(documentos[4])));
             }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException f){
             f.printStackTrace();
         }
+        
+        documentosMasBuscados=documentosRegistrados.toPila();
+        documentosMasBuscados.ordenarPilaMayorAMenor(documentosMasBuscados);
         //</editor-fold>
     }
     //</editor-fold>

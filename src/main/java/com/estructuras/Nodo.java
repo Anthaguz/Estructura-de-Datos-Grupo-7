@@ -24,4 +24,10 @@ public class Nodo {
     public Nodo(Documento documento) {
         this.documento = documento;
     }
+    
+    @Override
+    public String toString() {
+        return documento.toStringParaTabla();
+    }
+    
 }

@@ -11,6 +11,7 @@ public class Documento {
 
     //<editor-fold defaultstate="collapsed" desc="Variables">
     private int numeroDeDocumento;
+    private int numeroDeBusquedas;//Se incrementa al abrir el archivo, no al buscarlo
     private String nombre;
     private String fechaAdicion;
     private String horaAdicion;
@@ -41,6 +42,7 @@ public class Documento {
         }
         return null;
     }
+    public int getNumeroDeBusquedas(){return numeroDeBusquedas;}
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Setters">
@@ -54,6 +56,8 @@ public class Documento {
     }
     public void setFechaAdicion(String fechaAdicion) {this.fechaAdicion = fechaAdicion;}
     public void setHoraAdicion(String horaAdicion) {this.horaAdicion = horaAdicion;}
+    public void setNumeroDeBusquedas(int numeroDeBusquedas) {this.numeroDeBusquedas = numeroDeBusquedas;}
+    
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Constructores">
@@ -62,11 +66,23 @@ public class Documento {
        this.numeroDeDocumento = numeroDeDocumento;
        this.nombre = nombre;
        setFecha(fecha);
+       numeroDeBusquedas=0;
     }
+    public Documento(int numeroDeDocumento, String nombre, Date fecha,int busquedas) {
+       this.numeroDeDocumento = numeroDeDocumento;
+       this.nombre = nombre;
+       setFecha(fecha);
+       numeroDeBusquedas=busquedas;
+    }
+    
     //</editor-fold>
 
+    public String toStringParaTabla(){
+        return numeroDeDocumento+","+nombre+","+fechaAdicion+"     "+horaAdicion;
+    }
+    
     @Override
     public String toString() {
-        return numeroDeDocumento + "," + nombre + "," + fechaAdicion +","+horaAdicion;
+        return numeroDeDocumento + "," + nombre + "," + fechaAdicion +","+horaAdicion+","+numeroDeBusquedas;
     }
 }

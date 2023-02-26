@@ -1,5 +1,7 @@
 package com.estructuras;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -60,6 +62,26 @@ public class Cola {
     }
     //</editor-fold>
     
+    public Pila toPila(){
+        Pila resultado=new Pila();
+        Nodo aux=frente;
+        while(aux!=null){
+            resultado.apilar(aux.getDocumento());
+            aux=aux.getSiguiente();
+        }
+        return resultado;
+    }
+    
+    public void incrementarNumeroDeBusquedas(int id){
+        Nodo temp=frente;
+        while (temp!=null){
+            if(temp.getDocumento().getNumeroDeDocumento()!=id){temp=temp.getSiguiente();}
+            else{
+                temp.getDocumento().setNumeroDeBusquedas(temp.getDocumento().getNumeroDeBusquedas()+1);
+            }
+        }
+    }
+    
     //<editor-fold defaultstate="collapsed" desc="Buscadores">
     
     //retorna el documento con el nombre buscado
@@ -72,7 +94,7 @@ public class Cola {
         }
         return resultado;
     }  
-    
+        
     //retorna el documento con el ID buscado
     public Documento encontrarPorNumeroDeDocumento(int numeroDeDocumento){
         Documento resultado = null;
@@ -123,17 +145,18 @@ public class Cola {
         }
         return extraido;
     }
-      
     
-//    public String imprimirCola(){
-//        String respuesta="";
-//        Nodo temp = frente;
-//        while (temp!=null){
-//            respuesta += temp.toString()+",";
-//            temp=temp.getSiguiente();
-//        }
-//        return respuesta;
-//    }
+    public List<String[]> imprimirCola(){
+        List<String[]> respuesta=new ArrayList<>();
+        Nodo temp = frente;
+        while (temp!=null){
+            String contenidoDeNodo=temp.toString();
+            String[] tostring=contenidoDeNodo.split(",");
+            respuesta.add(tostring);
+            temp=temp.getSiguiente();
+        }
+        return respuesta;
+    }
 //      
 //    
 
