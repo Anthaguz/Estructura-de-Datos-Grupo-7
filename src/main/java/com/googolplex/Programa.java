@@ -39,8 +39,7 @@ import javax.swing.JOptionPane;
     
     //</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="Setters">
-
+    //<editor-fold defaultstate="collapsed" desc="No hay Setters">
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Constructores">
@@ -142,7 +141,21 @@ import javax.swing.JOptionPane;
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Inicializadores de archivos persistentes y variables globales">
+    private void crearFolder( File folder ){
+        if(!folder.exists()){
+            folder.mkdir();
+            System.out.println(
+                    "El folder \""+folder.getName()+"\" fue creado");
+        }
+    }
+    
     public void inicializadorDeRecursos(String nombreDeRegistro){
+
+        File folderRegistro=new File(pathRelativoDelPrograma+pathDeRegistros);
+        File folderArchivos=new File(pathRelativoDelPrograma+pathRelativoDeLosDocumentos);
+        crearFolder(folderRegistro);
+        crearFolder(folderArchivos);
+        
         File registro = new File(pathRelativoDelPrograma+pathDeRegistros+nombreDeRegistro);
         if (!registro.exists()) {
             try {
