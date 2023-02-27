@@ -67,6 +67,8 @@ import javax.swing.JOptionPane;
         Googolplex.consecutivoDeDocumentos++;
         Documento nuevo = new Documento(Googolplex.consecutivoDeDocumentos, nombreDelDocumento, fechaAdicion);
         nuevo.toString();
+        documentosMasBuscados.apilar(nuevo);
+        documentosMasBuscados.ordenarPilaMayorAMenor(documentosMasBuscados);
         documentosRegistrados.encolar(nuevo);
         List<Documento> documentos = new ArrayList<Documento>();
         documentos.add(nuevo);
@@ -127,6 +129,37 @@ import javax.swing.JOptionPane;
     //<editor-fold defaultstate="collapsed" desc="Metodo para popular la tabla">
     public List<String[]> popularTabla(){
         return documentosRegistrados.imprimirCola();
+    }
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Metodo para editar la linea del registro permanente que pertenece al Documento editado">
+    public void editarLineaDeDocumentoEditado(Documento aEditar){
+        List<String> documentos = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(getPathRelativoDelPrograma()+getPathDeRegistros()+"ArchivosRegistrados.txt"))) {
+            String documento;
+            while ((documento = reader.readLine()) != null) {
+                documentos.add(documento);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int numeroDeDocumento = aEditar.getNumeroDeDocumento();
+        for (String documento : documentos) {
+            if (documento.startsWith(numeroDeDocumento + ",")) {
+                String[] propiedadesDelDocumento = documento.split(",");
+                propiedadesDelDocumento[4] = Integer.toString(aEditar.getNumeroDeBusquedas());
+                String modifiedLine = String.join(",", propiedadesDelDocumento);
+                documentos.set(numeroDeDocumento - 1, modifiedLine);
+                break;
+            }
+        }
+        try (FileWriter writer = new FileWriter(getPathRelativoDelPrograma()+getPathDeRegistros()+"ArchivosRegistrados.txt")) {
+            for (String line : documentos) {
+                writer.write(line + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     //</editor-fold>
     

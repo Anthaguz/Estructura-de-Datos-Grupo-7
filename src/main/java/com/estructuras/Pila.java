@@ -122,6 +122,7 @@ public class Pila {
             if(temp.getDocumento().getNumeroDeDocumento()!=id){temp=temp.getSiguiente();}
             else{
                 temp.getDocumento().setNumeroDeBusquedas(temp.getDocumento().getNumeroDeBusquedas()+1);
+                break;
             }
         }
     }

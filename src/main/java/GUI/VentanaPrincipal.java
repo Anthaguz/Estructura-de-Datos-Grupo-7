@@ -96,6 +96,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 255));
 
+        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
         btnDocumentoExistente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -179,7 +180,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnSearch.setText("Search");
+        btnSearch.setText("Buscar");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -194,17 +195,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(53, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtboxSearch))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAbrirArchivo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbbxModoDeOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAbrirArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbbxModoDeOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtboxSearch))))
                 .addGap(50, 50, 50))
         );
         jPanel1Layout.setVerticalGroup(
@@ -296,12 +299,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         Documento paraAbrir = Googolplex.programa.getDocumentosRegistrados().encontrarPorNumeroDeDocumento(numeroDeDocumento);
         Googolplex.programa.getDocumentosRegistrados().incrementarNumeroDeBusquedas(paraAbrir.getNumeroDeDocumento());
+        //Googolplex.programa.getDocumentosMasBuscados().incrementarNumeroDeBusquedas(paraAbrir.getNumeroDeDocumento());
+        Googolplex.programa.getDocumentosMasBuscados().ordenarPilaMayorAMenor(Googolplex.programa.getDocumentosMasBuscados());
+        Googolplex.programa.editarLineaDeDocumentoEditado(paraAbrir);
         File archivo = new File(Googolplex.programa.getPathRelativoDelPrograma() + Googolplex.programa.getPathRelativoDeLosDocumentos() + paraAbrir.getNombre());
         try {
             Desktop.getDesktop().open(archivo);
         } catch (IOException f) {
             f.printStackTrace();
         }
+        llenarTabla();
     }//GEN-LAST:event_btnAbrirArchivoActionPerformed
 
     private void txtboxSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtboxSearchActionPerformed
