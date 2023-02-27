@@ -107,7 +107,7 @@ public class Pila {
         Pila resultado = new Pila();
         Nodo aux=cima;
         while(aux!=null){
-            if(aux.getDocumento().getNombre().contains(buscador)){
+            if((aux.getDocumento().getNombre().toLowerCase()).contains(buscador.toLowerCase())){
                 resultado.apilar(aux.getDocumento());
             }
             aux=aux.getSiguiente();

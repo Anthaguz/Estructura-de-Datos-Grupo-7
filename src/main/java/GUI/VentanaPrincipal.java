@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -66,6 +68,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
         llenarTabla();
+        txtboxSearch.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                buscar();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                buscar();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                buscar();
+            }
+            
+        });
     }
 
     /**
@@ -94,11 +113,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setTitle("Googolplex");
         setLocation(new java.awt.Point(400, 200));
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
+        jToolBar1.setBackground(java.awt.SystemColor.activeCaption);
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
+        btnDocumentoExistente.setBackground(new java.awt.Color(20, 128, 216));
         btnDocumentoExistente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnDocumentoExistente.setText("  Importar Documento  ");
         btnDocumentoExistente.setActionCommand("Importar Documento");
@@ -110,6 +131,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(btnDocumentoExistente);
 
+        btnDocumentoNuevo.setBackground(new java.awt.Color(20, 128, 216));
         btnDocumentoNuevo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnDocumentoNuevo.setText("  Crear documento  ");
         btnDocumentoNuevo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -120,6 +142,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jToolBar1.add(btnDocumentoNuevo);
 
+        btnActualizar.setBackground(new java.awt.Color(20, 128, 216));
         btnActualizar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnActualizar.setText("  Actualizar tabla  ");
         btnActualizar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -152,6 +175,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tablaDocumentos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(tablaDocumentos);
 
+        cbbxModoDeOrden.setBackground(java.awt.SystemColor.activeCaption);
         cbbxModoDeOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mas recientes", "Mas buscados", "Orden de ingreso" }));
         cbbxModoDeOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +185,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Orden de archivos:");
 
+        btnAbrirArchivo.setBackground(java.awt.SystemColor.activeCaption);
         btnAbrirArchivo.setText("  Abrir Archivo  ");
         btnAbrirArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,17 +194,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         txtboxSearch.setToolTipText("");
-        txtboxSearch.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtboxSearchCaretUpdate(evt);
-            }
-        });
-        txtboxSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtboxSearchActionPerformed(evt);
-            }
-        });
 
+        btnSearch.setBackground(java.awt.SystemColor.activeCaption);
         btnSearch.setText("Buscar");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,12 +230,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbbxModoDeOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(btnAbrirArchivo))
-                .addGap(27, 27, 27)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtboxSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
@@ -265,6 +281,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         llenarTabla();
+        txtboxSearch.setText("");
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void cbbxModoDeOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbxModoDeOrdenActionPerformed
@@ -274,14 +291,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             case 0:
                 sortMode="LIOT";
                 llenarTabla();
+                txtboxSearch.setText("");
                 break;
             case 1:
                 sortMode="MSOT";
                 llenarTabla();
+                txtboxSearch.setText("");
                 break;
             case 2:
                 sortMode="FIOT";
                 llenarTabla();
+                txtboxSearch.setText("");
                 break;
         }
     }//GEN-LAST:event_cbbxModoDeOrdenActionPerformed
@@ -311,24 +331,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         llenarTabla();
     }//GEN-LAST:event_btnAbrirArchivoActionPerformed
 
-    private void txtboxSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtboxSearchActionPerformed
-
-    }//GEN-LAST:event_txtboxSearchActionPerformed
-
-    private void txtboxSearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtboxSearchCaretUpdate
-        
-    }//GEN-LAST:event_txtboxSearchCaretUpdate
-
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+//        DefaultTableModel modelo = (DefaultTableModel) tablaDocumentos.getModel();
+//        Pila resultadoDeBusqueda=Googolplex.programa.getDocumentosMasBuscados().encontrarTodoDocumentoQueCalce(txtboxSearch.getText());
+//        modelo.setRowCount(0);
+//        List<String[]> documentosPorBusquedas = resultadoDeBusqueda.imprimirPila();
+//        for (String[] row : documentosPorBusquedas) {
+//            modelo.addRow(row);
+//        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void buscar(){
+        String search=txtboxSearch.getText();
+        System.out.println("++"+search+"++");
         DefaultTableModel modelo = (DefaultTableModel) tablaDocumentos.getModel();
-        Pila resultadoDeBusqueda=Googolplex.programa.getDocumentosMasBuscados().encontrarTodoDocumentoQueCalce(txtboxSearch.getText());
+        Pila resultadoDeBusqueda=Googolplex.programa.getDocumentosMasBuscados().encontrarTodoDocumentoQueCalce(search);
         modelo.setRowCount(0);
         List<String[]> documentosPorBusquedas = resultadoDeBusqueda.imprimirPila();
         for (String[] row : documentosPorBusquedas) {
             modelo.addRow(row);
         }
-    }//GEN-LAST:event_btnSearchActionPerformed
-
+//        search=null;
+//        System.gc();
+    }
+    
     /**
      * @param args the command line arguments
      */
