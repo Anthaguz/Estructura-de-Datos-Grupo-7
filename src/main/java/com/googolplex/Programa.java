@@ -1,7 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+//Github: https://github.com/Anthaguz/Estructura-de-Datos-Grupo-7
+
 package com.googolplex;
 
 import GUI.VentanaPrincipal;
