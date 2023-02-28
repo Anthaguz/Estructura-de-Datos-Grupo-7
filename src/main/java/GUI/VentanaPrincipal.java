@@ -93,8 +93,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
+        filler6 = new javax.swing.Box.Filler(new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 32767));
+        filler7 = new javax.swing.Box.Filler(new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 32767));
+        filler12 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
+        filler11 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
+        filler8 = new javax.swing.Box.Filler(new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 32767));
+        filler10 = new javax.swing.Box.Filler(new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 32767));
         btnDocumentoExistente = new javax.swing.JButton();
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 32767));
         btnDocumentoNuevo = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 0), new java.awt.Dimension(3, 32767));
         btnActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDocumentos = new javax.swing.JTable();
@@ -113,29 +121,43 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jToolBar1.setBackground(java.awt.SystemColor.activeCaption);
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
+        jToolBar1.add(filler6);
+        jToolBar1.add(filler7);
+        jToolBar1.add(filler12);
+        jToolBar1.add(filler11);
+        jToolBar1.add(filler8);
+        jToolBar1.add(filler10);
 
         btnDocumentoExistente.setBackground(new java.awt.Color(20, 128, 216));
         btnDocumentoExistente.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnDocumentoExistente.setText("  Importar Documento  ");
         btnDocumentoExistente.setActionCommand("Importar Documento");
         btnDocumentoExistente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDocumentoExistente.setMaximumSize(new java.awt.Dimension(133, 25));
+        btnDocumentoExistente.setMinimumSize(new java.awt.Dimension(133, 25));
+        btnDocumentoExistente.setPreferredSize(new java.awt.Dimension(133, 25));
         btnDocumentoExistente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDocumentoExistenteActionPerformed(evt);
             }
         });
         jToolBar1.add(btnDocumentoExistente);
+        jToolBar1.add(filler2);
 
         btnDocumentoNuevo.setBackground(new java.awt.Color(20, 128, 216));
         btnDocumentoNuevo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnDocumentoNuevo.setText("  Crear documento  ");
         btnDocumentoNuevo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDocumentoNuevo.setMaximumSize(new java.awt.Dimension(133, 25));
+        btnDocumentoNuevo.setMinimumSize(new java.awt.Dimension(133, 25));
+        btnDocumentoNuevo.setPreferredSize(new java.awt.Dimension(133, 25));
         btnDocumentoNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDocumentoNuevoActionPerformed(evt);
             }
         });
         jToolBar1.add(btnDocumentoNuevo);
+        jToolBar1.add(filler1);
 
         btnActualizar.setBackground(new java.awt.Color(20, 128, 216));
         btnActualizar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -143,6 +165,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnActualizar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnActualizar.setFocusable(false);
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnActualizar.setMaximumSize(new java.awt.Dimension(133, 25));
+        btnActualizar.setMinimumSize(new java.awt.Dimension(133, 25));
+        btnActualizar.setPreferredSize(new java.awt.Dimension(133, 25));
         btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,8 +249,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbbxModoDeOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -402,6 +427,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnDocumentoNuevo;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cbbxModoDeOrden;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler10;
+    private javax.swing.Box.Filler filler11;
+    private javax.swing.Box.Filler filler12;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler6;
+    private javax.swing.Box.Filler filler7;
+    private javax.swing.Box.Filler filler8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
