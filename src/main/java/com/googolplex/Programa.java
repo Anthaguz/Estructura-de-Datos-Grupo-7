@@ -142,14 +142,19 @@ import javax.swing.JOptionPane;
             e.printStackTrace();
         }
         int numeroDeDocumento = aEditar.getNumeroDeDocumento();
-        for (String documento : documentos) {
-            if (documento.startsWith(numeroDeDocumento + ",")) {
-                String[] propiedadesDelDocumento = documento.split(",");
-                propiedadesDelDocumento[4] = Integer.toString(aEditar.getNumeroDeBusquedas());
-                String modifiedLine = String.join(",", propiedadesDelDocumento);
-                documentos.set(numeroDeDocumento - 1, modifiedLine);
-                break;
+        try{
+            for (String documento : documentos) {
+                if (documento.startsWith(numeroDeDocumento + ",")) {
+                    String[] propiedadesDelDocumento = documento.split(",");
+                    propiedadesDelDocumento[4] = Integer.toString(aEditar.getNumeroDeBusquedas());
+                    String modifiedLine = String.join(",", propiedadesDelDocumento);
+                    documentos.set(numeroDeDocumento - 1, modifiedLine);
+                    break;
+                }
             }
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("El registro de archivos tiene un consecutivo corrupto, con una linea faltante.");
         }
         try (FileWriter writer = new FileWriter(getPathRelativoDelPrograma()+getPathDeRegistros()+"ArchivosRegistrados.txt")) {
             for (String line : documentos) {

@@ -2,8 +2,9 @@
 
 package com.googolplex;
 
-import GUI.VentanaPrincipal;
-import com.estructuras.Cola;
+import java.io.IOException;
+import java.net.ServerSocket;
+import javax.swing.JOptionPane;
 
 public class Googolplex{
 
@@ -14,6 +15,14 @@ public class Googolplex{
 
     //</editor-fold>
     public static void main( String[] args ){
+        ServerSocket ss=null;
+        try {
+            ss = new ServerSocket(1044);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "La aplicacion ya esta abierta, cierre todas las instancias actuales antes de continuar.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("La aplicacion ya esta abierta, cierre todas las instancias actuales antes de continuar.");
+            System.exit(-1);
+        }
         programa.run();
     }
 }
