@@ -119,7 +119,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jToolBar1.setBackground(java.awt.SystemColor.activeCaption);
-        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
         jToolBar1.add(filler6);
         jToolBar1.add(filler7);
@@ -214,6 +213,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         txtboxSearch.setToolTipText("Presione buscar para actualizar la busqueda");
+        txtboxSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtboxSearchActionPerformed(evt);
+            }
+        });
 
         btnSearch.setBackground(java.awt.SystemColor.activeCaption);
         btnSearch.setText("Buscar");
@@ -329,13 +333,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnAbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirArchivoActionPerformed
         int lineaSeleccionada = tablaDocumentos.getSelectedRow();
         int numeroDeDocumento = -1;
-        if (lineaSeleccionada != -1) {
-            Object contenidoDeLinea = tablaDocumentos.getModel().getValueAt(lineaSeleccionada, 0);
-            numeroDeDocumento = Integer.parseInt(contenidoDeLinea.toString());
+        if (lineaSeleccionada == -1) {
+            //JOptionPane.showMessageDialog(null, "Error: El documento no se encontro.", "Error", JOptionPane.ERROR_MESSAGE);
+            //return;
+            lineaSeleccionada=0;
         }
-        if (numeroDeDocumento == -1) {
-            JOptionPane.showMessageDialog(null, "Error: El documento no se encontro.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        if (lineaSeleccionada != -1) {
+            try{
+                Object contenidoDeLinea = tablaDocumentos.getModel().getValueAt(lineaSeleccionada, 0);
+                numeroDeDocumento = Integer.parseInt(contenidoDeLinea.toString());
+                
+            }catch(ArrayIndexOutOfBoundsException e){
+                JOptionPane.showMessageDialog(null, "Error: Aun no se han insertado documentos.", "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                return;
+            }
         }
         Documento paraAbrir = Googolplex.programa.getDocumentosRegistrados().encontrarPorNumeroDeDocumento(numeroDeDocumento);
         Googolplex.programa.getDocumentosRegistrados().incrementarNumeroDeBusquedas(paraAbrir.getNumeroDeDocumento());
@@ -360,6 +372,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 //            modelo.addRow(row);
 //        }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void txtboxSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtboxSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtboxSearchActionPerformed
 
     private void buscar(){
         String search=txtboxSearch.getText();

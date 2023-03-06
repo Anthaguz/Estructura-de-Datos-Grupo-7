@@ -20,12 +20,10 @@ public class Nodo {
     //<editor-fold defaultstate="collapsed" desc="Constructores">
     public Nodo() {}
     
-    
-    //</editor-fold>
-
     public Nodo(Documento documento) {
         this.documento = documento;
     }
+    //</editor-fold>
     
     @Override
     public String toString() {

@@ -3,6 +3,7 @@
 package com.googolplex;
 
 import GUI.VentanaPrincipal;
+import com.estructuras.Cache;
 import com.estructuras.Cola;
 import com.estructuras.Documento;
 import com.estructuras.Pila;
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
     //<editor-fold defaultstate="collapsed" desc="Declaracion de variables">
     private Cola documentosRegistrados;
     private Pila documentosMasBuscados;
+    private Cache cacheDeBusquedas;
     private final String pathRelativoDelPrograma;
     private final String pathRelativoDeLosDocumentos;    
     private final String pathDeRegistros;    
@@ -237,6 +239,7 @@ import javax.swing.JOptionPane;
         documentosMasBuscados=documentosRegistrados.toPila();
         documentosMasBuscados.ordenarPilaMayorAMenor(documentosMasBuscados);
         //</editor-fold>
+        
     }
     //</editor-fold>
 }
