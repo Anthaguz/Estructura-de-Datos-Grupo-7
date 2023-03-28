@@ -7,6 +7,7 @@ import com.estructuras.Cache;
 import com.estructuras.Cola;
 import com.estructuras.Documento;
 import com.estructuras.Pila;
+import java.awt.Dimension;
 import java.io.BufferedReader;
 import javax.swing.JFileChooser;
 import java.io.File;
@@ -36,6 +37,7 @@ import javax.swing.JOptionPane;
     public String getPathDeRegistros() {return pathDeRegistros;}
     public Cola getDocumentosRegistrados() {return documentosRegistrados;}
     public Pila getDocumentosMasBuscados() {return documentosMasBuscados;}
+    public Cache getCacheDeBusquedas() {return cacheDeBusquedas;}
     
     //</editor-fold>
     
@@ -48,6 +50,7 @@ import javax.swing.JOptionPane;
         this.pathRelativoDelPrograma = System.getProperty("user.dir");
         this.pathRelativoDeLosDocumentos="\\src\\main\\java\\docs\\";
         this.pathDeRegistros="/src/main/java/registros/";
+        this.cacheDeBusquedas=new Cache();
     }
     //</editor-fold>
     
@@ -55,6 +58,12 @@ import javax.swing.JOptionPane;
     public File leerArchivoExistente() {
         File archivo=null;
         JFileChooser selectorDeArchivos = new JFileChooser();
+        selectorDeArchivos.setPreferredSize(new Dimension(1000, 900));
+        try{
+            selectorDeArchivos.setCurrentDirectory(new File("D:\\Universidad\\2023 1Q\\Estructura de datos\\Archivos Demos"));
+        }catch (Exception e){
+            System.out.println(e.getStackTrace());
+        }
         int resultadoDelDialogo = selectorDeArchivos.showOpenDialog(null);
         if (resultadoDelDialogo == JFileChooser.APPROVE_OPTION) {
             archivo = selectorDeArchivos.getSelectedFile();
@@ -239,7 +248,9 @@ import javax.swing.JOptionPane;
         documentosMasBuscados=documentosRegistrados.toPila();
         documentosMasBuscados.ordenarPilaMayorAMenor(documentosMasBuscados);
         //</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="Leyendo el Cache Permanente">
         
+        //</editor-fold>
     }
     //</editor-fold>
 }

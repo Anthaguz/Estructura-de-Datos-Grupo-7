@@ -22,15 +22,11 @@ public class CacheNode{
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Constructores">
     public CacheNode(){}
-    public CacheNode( Busqueda busqueda, String[] resultados ){
+    public CacheNode( Busqueda busqueda, Pila resultados ){
         this.busqueda = busqueda;
-        if(resultados.length>0){
-            for(String resultado:resultados){
-                this.resultados.apilar(Googolplex.programa.getDocumentosRegistrados().encontrarPorNumeroDeDocumento(
-                    Integer.parseInt(resultado)));
-            }
-            this.resultados.ordenarPilaMayorAMenor(this.resultados);
-        }
+        this.resultados=resultados;
+        this.resultados.ordenarPilaMayorAMenor(this.resultados);
+        
     }
     //</editor-fold>
 

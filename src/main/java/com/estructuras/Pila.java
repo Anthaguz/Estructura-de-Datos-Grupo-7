@@ -50,19 +50,6 @@ public class Pila {
         }
     }
     
-//    public void imprimirPila(){
-//        String respuesta= "";
-//        if(!esVacia()){
-//            Nodo aux = cima;
-//            while (aux !=null){
-//                respuesta = respuesta + "\n" + aux.getDocumento();
-//                aux=aux.getSiguiente();
-//            }
-//        }
-//        respuesta = respuesta + "\n-null-"; 
-//        System.out.println(respuesta);
-//    }
-    
     //<editor-fold defaultstate="collapsed" desc="Ordenar de mayor a menor">
 
     public void insertarOrdenadoMayorAMenor(Pila pila, Documento cima)  
