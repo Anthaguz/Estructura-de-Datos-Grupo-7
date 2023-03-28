@@ -4,6 +4,7 @@ package com.googolplex;
 
 import GUI.VentanaPrincipal;
 import com.estructuras.Cache;
+import com.estructuras.CacheContenido;
 import com.estructuras.Cola;
 import com.estructuras.Documento;
 import com.estructuras.Pila;
@@ -26,6 +27,7 @@ import javax.swing.JOptionPane;
     private Cola documentosRegistrados;
     private Pila documentosMasBuscados;
     private Cache cacheDeBusquedas;
+    private CacheContenido cacheDeContenido;
     private final String pathRelativoDelPrograma;
     private final String pathRelativoDeLosDocumentos;    
     private final String pathDeRegistros;    
@@ -38,7 +40,7 @@ import javax.swing.JOptionPane;
     public Cola getDocumentosRegistrados() {return documentosRegistrados;}
     public Pila getDocumentosMasBuscados() {return documentosMasBuscados;}
     public Cache getCacheDeBusquedas() {return cacheDeBusquedas;}
-    
+    public CacheContenido getCacheContenido(){return cacheDeContenido;}
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="No hay Setters">
@@ -51,6 +53,7 @@ import javax.swing.JOptionPane;
         this.pathRelativoDeLosDocumentos="\\src\\main\\java\\docs\\";
         this.pathDeRegistros="/src/main/java/registros/";
         this.cacheDeBusquedas=new Cache();
+        this.cacheDeContenido=new CacheContenido();
     }
     //</editor-fold>
     
@@ -60,7 +63,7 @@ import javax.swing.JOptionPane;
         JFileChooser selectorDeArchivos = new JFileChooser();
         selectorDeArchivos.setPreferredSize(new Dimension(1000, 900));
         try{
-            selectorDeArchivos.setCurrentDirectory(new File("D:\\Universidad\\2023 1Q\\Estructura de datos\\Archivos Demos"));
+            selectorDeArchivos.setCurrentDirectory(new File("D:\\Universidad\\2023 1Q\\Estructura de datos\\Archivos Demo"));
         }catch (Exception e){
             System.out.println(e.getStackTrace());
         }

@@ -90,4 +90,22 @@ public class Cache{
         }
         return resultado;
     }
+    
+//    public Pila pilaVecesBusquedaEnDocumento(String busqueda){
+//        String path = Googolplex.programa.getPathRelativoDeLosDocumentos();
+//        File archivosRegistrados = new File(pathRelativoDelPrograma+pathDeRegistros+"ArchivosRegistrados.txt");
+//        try (BufferedReader reader = new BufferedReader(new FileReader(archivosRegistrados))) {
+//            String linea;
+//            while ((linea = reader.readLine()) != null) {
+//                String[] documentos = linea.split(",");
+//                Date fecha= formatoFecha.parse(documentos[2]+" "+documentos[3]);
+//                documentosRegistrados.encolar(new Documento(Integer.parseInt(documentos[0]),documentos[1],fecha,Integer.parseInt(documentos[4])));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ParseException f){
+//            f.printStackTrace();
+//        }
+//    }
+    
 }
