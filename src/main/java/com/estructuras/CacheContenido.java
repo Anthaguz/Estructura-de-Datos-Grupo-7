@@ -25,16 +25,7 @@ public class CacheContenido{
     
     //<editor-fold defaultstate="collapsed" desc="Podria usarse despues">
     
-//    public void apilar(String[] entrada){
-//        Busqueda busqueda=new Busqueda(Integer.parseInt(entrada[0]),entrada[1]);
-//        Pila resultadoDeBusqueda=Googolplex.programa.getDocumentosMasBuscados().encontrarTodoDocumentoQueCalce(entrada[1].toLowerCase());
-//        CacheNode nuevo = new CacheNode(busqueda,resultadoDeBusqueda);
-//        if (isEmpty()) {cima=nuevo;}
-//        else {
-//            nuevo.setSiguiente(cima);
-//            cima = nuevo;
-//        }
-//    }
+
 //    
 //    public boolean existeBusquedaReciente(String busqueda){
 //        CacheNode aux=cima;
@@ -157,6 +148,36 @@ public class CacheContenido{
     
     public void apilarPalabra(List<String> palabra,String nombreDeArchivo){
         //Nodo CacheNodeContenido usando el indice 1 de la lista para la palabra a buscar y el indice 0 + nombreDeArchivo para apilar ordenadamente el documento añadido 
+        CacheNodeContenido temp=existePalabra(palabra.get(1).toLowerCase());
+        if(temp!=null){
+            temp.getResultados().apilar(Integer.parseInt(palabra.get(0)),nombreDeArchivo);
+            
+            System.out.println("asd");
+        }else{
+            CacheNodeContenido nuevo=new CacheNodeContenido(palabra.get(1),new PilaContenidoNodo(Integer.parseInt(palabra.get(0)),nombreDeArchivo));
+            if (isEmpty()) {
+                cima = nuevo;
+            } else {
+                nuevo.setSiguiente(cima);
+                cima = nuevo;
+            }
+        }
+        System.out.println("asd");
+
+//    }
+    }
+    
+    public CacheNodeContenido existePalabra(String busqueda){
+        CacheNodeContenido aux=cima;
+        CacheNodeContenido resultado=null;
+        while (aux!=null){
+            if(aux.getBusqueda().toLowerCase().equals(busqueda)){
+                resultado=aux;
+                break;
+            }
+            aux=aux.getSiguiente();
+        }
+        return resultado;
     }
     
     public void analizar(File nombreDelDocumento){
@@ -165,4 +186,6 @@ public class CacheContenido{
             apilarPalabra(palabra,nombreDelDocumento.getName());
         }
     }
+    
+    
 }

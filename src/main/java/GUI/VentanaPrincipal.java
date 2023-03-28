@@ -3,6 +3,7 @@
 package GUI;
 
 import com.estructuras.Busqueda;
+import com.estructuras.CacheNodeContenido;
 import com.estructuras.Documento;
 import com.estructuras.Pila;
 import com.googolplex.Googolplex;
@@ -64,6 +65,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 break;
         }
     }
+    
     public VentanaPrincipal() {
         initComponents();
         llenarTabla();
@@ -353,7 +355,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnDocumentoExistenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentoExistenteActionPerformed
         // TODO add your handling code here:
         File archivo=Googolplex.programa.leerArchivoExistente();
-        Googolplex.programa.getCacheContenido().analizar(archivo);
         File destino = new File(Googolplex.programa.getPathRelativoDelPrograma()+Googolplex.programa.getPathRelativoDeLosDocumentos()+archivo.getName());
         try {
             Files.copy(archivo.toPath(), destino.toPath());
@@ -363,6 +364,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             e.printStackTrace();
         }  
         llenarTabla();
+        Googolplex.programa.getCacheContenido().analizar(archivo);
     }//GEN-LAST:event_btnDocumentoExistenteActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -469,28 +471,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     private void accionBtnSearchContent(){
-        Pila paraPonerEnTabla=new Pila();
-        try{
-
-            if(Googolplex.programa.getCacheDeBusquedas().existeBusquedaReciente(txtboxSearchName.getText().toLowerCase())){
-                Busqueda busqueda=Googolplex.programa.getCacheDeBusquedas().getBusqueda(txtboxSearchName.getText().toLowerCase());
-                Googolplex.programa.getCacheDeBusquedas().modificarBusquedaAnterior(busqueda);
-                paraPonerEnTabla=Googolplex.programa.getCacheDeBusquedas().getResultado(busqueda.getKeyword());
-    //                JOptionPane.showMessageDialog(rootPane, "Se encontro la busqueda", "Error", JOptionPane.ERROR_MESSAGE);
-            }else{
-    //                JOptionPane.showMessageDialog(rootPane, "La busqueda se hizo por primera vez", "Error", JOptionPane.ERROR_MESSAGE);
-                String busqueda="0,"+txtboxSearchName.getText().toLowerCase();
-                Googolplex.programa.getCacheDeBusquedas().apilar(busqueda.split(","));
-                Busqueda busqueda1=Googolplex.programa.getCacheDeBusquedas().getBusqueda(txtboxSearchName.getText().toLowerCase());
-                paraPonerEnTabla=Googolplex.programa.getCacheDeBusquedas().getResultado(busqueda1.getKeyword());
-            }
-        }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(rootPane, "El cache esta nulo", "Error", JOptionPane.ERROR_MESSAGE);
-            String busqueda="0,"+txtboxSearchName.getText();
-            Googolplex.programa.getCacheDeBusquedas().apilar(busqueda.split(","));
-        } 
-
-
+        
+        CacheNodeContenido temp=Googolplex.programa.getCacheContenido().existePalabra(txtboxSearchContents.getText());
+        if(temp==null){
+            DefaultTableModel modelo = (DefaultTableModel) tablaDocumentos.getModel();
+            modelo.setRowCount(0);
+            return;
+        }
+        Pila paraPonerEnTabla=temp.getPilaDeDocumentosParaTabla();
+//        Pila paraPonerEnTabla=new Pila();
+//        try{
+//
+//            if(Googolplex.programa.getCacheDeBusquedas().existeBusquedaReciente(txtboxSearchName.getText().toLowerCase())){
+//                Busqueda busqueda=Googolplex.programa.getCacheDeBusquedas().getBusqueda(txtboxSearchName.getText().toLowerCase());
+//                Googolplex.programa.getCacheDeBusquedas().modificarBusquedaAnterior(busqueda);
+//                paraPonerEnTabla=Googolplex.programa.getCacheDeBusquedas().getResultado(busqueda.getKeyword());
+//    //                JOptionPane.showMessageDialog(rootPane, "Se encontro la busqueda", "Error", JOptionPane.ERROR_MESSAGE);
+//            }else{
+//    //                JOptionPane.showMessageDialog(rootPane, "La busqueda se hizo por primera vez", "Error", JOptionPane.ERROR_MESSAGE);
+//                String busqueda="0,"+txtboxSearchName.getText().toLowerCase();
+//                Googolplex.programa.getCacheDeBusquedas().apilar(busqueda.split(","));
+//                Busqueda busqueda1=Googolplex.programa.getCacheDeBusquedas().getBusqueda(txtboxSearchName.getText().toLowerCase());
+//                paraPonerEnTabla=Googolplex.programa.getCacheDeBusquedas().getResultado(busqueda1.getKeyword());
+//            }
+//        }catch(NullPointerException e){
+//            JOptionPane.showMessageDialog(rootPane, "El cache esta nulo", "Error", JOptionPane.ERROR_MESSAGE);
+//            String busqueda="0,"+txtboxSearchName.getText();
+//            Googolplex.programa.getCacheDeBusquedas().apilar(busqueda.split(","));
+//        } 
+//
+//
         DefaultTableModel modelo = (DefaultTableModel) tablaDocumentos.getModel();
         modelo.setRowCount(0);
         List<String[]> documentosPorBusquedas=paraPonerEnTabla.imprimirPila();

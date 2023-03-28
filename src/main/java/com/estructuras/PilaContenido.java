@@ -1,11 +1,12 @@
 //Github: https://github.com/Anthaguz/Estructura-de-Datos-Grupo-7
 package com.estructuras;
 
+import com.googolplex.Googolplex;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PilaContenido {
-    private Nodo cima;
+    private PilaContenidoNodo cima;
     
     public PilaContenido(){
         this.cima=null;
@@ -16,11 +17,8 @@ public class PilaContenido {
         return false;
     }
     
-    public void apilar(){
-        Documento d= new Documento();
-        //pendiente: recibir los datos del documento
-        Nodo nuevo = new Nodo();
-        nuevo.setDocumento(d);
+    public void apilar(int cantidad,String nombreDelArchivo){
+        PilaContenidoNodo nuevo = new PilaContenidoNodo(cantidad,nombreDelArchivo);
         if (esVacia()) {cima=nuevo;}
         else {
             nuevo.setSiguiente(cima);
@@ -28,11 +26,7 @@ public class PilaContenido {
         }
     }
     
-    public void apilar(int n){
-        Documento d= new Documento();
-        //pendiente: recibir los datos del documento
-        Nodo nuevo = new Nodo();
-        nuevo.setDocumento(d);
+    public void apilar(PilaContenidoNodo nuevo){
         if (esVacia()) {cima=nuevo;}
         else {
             nuevo.setSiguiente(cima);
@@ -40,26 +34,38 @@ public class PilaContenido {
         }
     }
     
-    public void apilar(Documento d){
-        Nodo nuevo = new Nodo();
-        nuevo.setDocumento(d);
-        if (esVacia()) {cima=nuevo;}
-        else {
-            nuevo.setSiguiente(cima);
-            cima = nuevo;
+    public void prepararDocumentos(PilaContenido pila, Pila temp){
+        PilaContenidoNodo nodo=pila.extraer();
+        if(!pila.esVacia())prepararDocumentos(pila, temp);
+        Documento doc=Googolplex.programa.getDocumentosRegistrados().encontrarPorNombre(nodo.getDocumento());
+        if(doc!=null){
+            temp.apilar(doc);
         }
+        pila.apilar(nodo);
     }
     
-    //<editor-fold defaultstate="collapsed" desc="Ordenar de mayor a menor">
+    public Pila getPilaDeDocumentosParaTabla(String busqueda){
+        Pila temp=new Pila();
+        prepararDocumentos(this,temp);
+        return temp;
+//        PilaContenidoNodo aux=cima;
+//        while(aux!=null){
+//            Documento tempDoc = Googolplex.programa.getDocumentosRegistrados().encontrarPorNombre(aux.getDocumento());
+//            if(tempDoc!=null){
+//                
+//            }
+//        }
+    }
+        //<editor-fold defaultstate="collapsed" desc="Ordenar de mayor a menor">
 
-    public void insertarOrdenadoMayorAMenor(PilaContenido pila, Documento cima)  
+    public void insertarOrdenadoMayorAMenor(PilaContenido pila, PilaContenidoNodo cima)  
     {  
-        if (pila.esVacia() || cima.getNumeroDeBusquedas() > pila.cima.getDocumento().getNumeroDeBusquedas())  
+        if (pila.esVacia() || cima.getCantidad() > pila.cima.getCantidad())  
         {  
             pila.apilar(cima);  
             return;  
         }  
-        Documento temp = pila.extraer();  
+        PilaContenidoNodo temp = pila.extraer();  
         insertarOrdenadoMayorAMenor(pila, cima);   
         pila.apilar(temp);  
     }  
@@ -67,57 +73,84 @@ public class PilaContenido {
     public void ordenarPilaMayorAMenor(PilaContenido pila)  
     {  
         if (pila.esVacia()) {return;}  
-        Documento temp = pila.extraer();   
+        PilaContenidoNodo temp = pila.extraer();   
         ordenarPilaMayorAMenor(pila);  
         insertarOrdenadoMayorAMenor(pila, temp);  
     }  
     
-    public Documento extraer(){
-        Documento x=cima.getDocumento();
+    public PilaContenidoNodo extraer(){
+        PilaContenidoNodo x=cima;
         cima=cima.getSiguiente();
         return x;
     }
     //</editor-fold>
     
-    public List<String[]> imprimirPila(){
-        List<String[]> respuesta=new ArrayList<>();
-        Nodo temp = cima;
-        while (temp!=null){
-            String contenidoDeNodo=temp.toString();
-            String[] tostring=contenidoDeNodo.split(",");
-            respuesta.add(tostring);
-            temp=temp.getSiguiente();
-        }
-        return respuesta;
-    }
-    
-    public PilaContenido encontrarTodoDocumentoQueCalce(String buscador){
-        PilaContenido resultado = new PilaContenido();
-        Nodo aux=cima;
-        while(aux!=null){
-            if((aux.getDocumento().getNombre().toLowerCase()).contains(buscador.toLowerCase())){
-                resultado.apilar(aux.getDocumento());
-            }
-            aux=aux.getSiguiente();
-        }
-        resultado.ordenarPilaMayorAMenor(resultado);
-        return resultado;
-    }
-    
-    public void incrementarNumeroDeBusquedas(int id){
-        Nodo temp=cima;
-        while (temp!=null){
-            if(temp.getDocumento().getNumeroDeDocumento()!=id){temp=temp.getSiguiente();}
-            else{
-                temp.getDocumento().setNumeroDeBusquedas(temp.getDocumento().getNumeroDeBusquedas()+1);
-                break;
-            }
-        }
-    }
+    //<editor-fold defaultstate="collapsed" desc="Podria usarse despues">
+
+//    
+//    public void apilar(int n){
+//        Documento d= new Documento();
+//        //pendiente: recibir los datos del documento
+//        PilaContenidoNodo nuevo = new PilaContenidoNodo();
+//        nuevo.setDocumento(d);
+//        if (esVacia()) {cima=nuevo;}
+//        else {
+//            nuevo.setSiguiente(cima);
+//            cima = nuevo;
+//        }
+//    }
+//    
+//    public void apilar(Documento d){
+//        PilaContenidoNodo nuevo = new PilaContenidoNodo();
+//        nuevo.setDocumento(d);
+//        if (esVacia()) {cima=nuevo;}
+//        else {
+//            nuevo.setSiguiente(cima);
+//            cima = nuevo;
+//        }
+//    }
+//    
+
+//    
+//    public List<String[]> imprimirPilaContenido(){
+//        List<String[]> respuesta=new ArrayList<>();
+//        PilaContenidoNodo temp = cima;
+//        while (temp!=null){
+//            String contenidoDePilaContenidoNodo=temp.toString();
+//            String[] tostring=contenidoDePilaContenidoNodo.split(",");
+//            respuesta.add(tostring);
+//            temp=temp.getSiguiente();
+//        }
+//        return respuesta;
+//    }
+//    
+//    public PilaContenido encontrarTodoDocumentoQueCalce(String buscador){
+//        PilaContenido resultado = new PilaContenido();
+//        PilaContenidoNodo aux=cima;
+//        while(aux!=null){
+//            if((aux.getDocumento().getNombre().toLowerCase()).contains(buscador.toLowerCase())){
+//                resultado.apilar(aux.getDocumento());
+//            }
+//            aux=aux.getSiguiente();
+//        }
+//        resultado.ordenarPilaMayorAMenor(resultado);
+//        return resultado;
+//    }
+//    
+//    public void incrementarNumeroDeBusquedas(int id){
+//        PilaContenidoNodo temp=cima;
+//        while (temp!=null){
+//            if(temp.getDocumento().getNumeroDeDocumento()!=id){temp=temp.getSiguiente();}
+//            else{
+//                temp.getDocumento().setNumeroDeBusquedas(temp.getDocumento().getNumeroDeBusquedas()+1);
+//                break;
+//            }
+//        }
+//    }
     
 //    public boolean encontrarNumero(int numero){
 //        if(esVacia()){return false;}
-//        Nodo aux = cima;
+//        PilaContenidoNodo aux = cima;
 //        while (aux !=null){
 //            if (numero==aux.getDocumento().getNumero()) {return true;}
 //            aux=aux.getSiguiente();
@@ -127,8 +160,8 @@ public class PilaContenido {
 //    
 //    public void extraerNumero(int x){
 //        if(esVacia()){return;}
-//        Nodo aux = cima;
-//        Nodo anterior = aux;
+//        PilaContenidoNodo aux = cima;
+//        PilaContenidoNodo anterior = aux;
 //        boolean cambios=false;
 //        if (aux.getDocumento().getNumero()==x){
 //            cima=aux.getSiguiente();
@@ -182,4 +215,5 @@ public class PilaContenido {
 //        dato.setNumero(dato.getNumero()+1);
 //        System.out.println("\nTest3: "+dato.getNumero());
 //    }
+    //</editor-fold>
 }

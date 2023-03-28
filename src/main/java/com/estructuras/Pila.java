@@ -114,6 +114,7 @@ public class Pila {
             }
         }
     }
+
     
 //    public boolean encontrarNumero(int numero){
 //        if(esVacia()){return false;}

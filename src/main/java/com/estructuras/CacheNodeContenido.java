@@ -6,35 +6,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CacheNodeContenido{
-    private Busqueda busqueda;
-    private Pila resultados;
+    private String busqueda;
+    private PilaContenido resultados;
     private CacheNodeContenido siguiente;
 
     //<editor-fold defaultstate="collapsed" desc="Getters">
-    public Busqueda getBusqueda(){return busqueda;}
-    public Pila getResultados(){return resultados;}
+    public String getBusqueda(){return busqueda;}
+    public PilaContenido getResultados(){return resultados;}
     public CacheNodeContenido getSiguiente(){return siguiente;}
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Setters">
-    public void setBusqueda( Busqueda busqueda ){this.busqueda = busqueda;}
-    public void setResultados( Pila resultados ){this.resultados = resultados;}
+    public void setString( String busqueda ){this.busqueda = busqueda;}
+    public void setResultados( PilaContenido resultados ){this.resultados = resultados;}
     public void setSiguiente( CacheNodeContenido siguiente ){this.siguiente = siguiente;}
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Constructores">
     public CacheNodeContenido(){}
-    public CacheNodeContenido( Busqueda busqueda, Pila resultados ){
+    public CacheNodeContenido( String busqueda, PilaContenidoNodo resultados ){
         this.busqueda = busqueda;
-        this.resultados=resultados;
+        this.resultados=new PilaContenido();
+        this.resultados.apilar(resultados);
         this.resultados.ordenarPilaMayorAMenor(this.resultados);
         
     }
     //</editor-fold>
-
+    
+    public Pila getPilaDeDocumentosParaTabla(){
+        Pila temp=resultados.getPilaDeDocumentosParaTabla(busqueda);
+        return temp;
+    }
+    
     @Override
     public String toString(){
         String resultado=busqueda.toString()+",";
         List<String[]> documentos=new ArrayList<>();
-        documentos=resultados.imprimirPila();
+//        documentos=resultados.imprimirPilaContenido();
         for(String[] documento:documentos){
             resultado+=documento[0];
         }

@@ -25,7 +25,7 @@ public class PilaContenidoNodo {
     //<editor-fold defaultstate="collapsed" desc="Constructores">
     public PilaContenidoNodo() {}
     
-    public PilaContenidoNodo(String documento,int cantidad) {
+    public PilaContenidoNodo(int cantidad,String documento) {
         this.documento = documento;
         this.cantidad=cantidad;
     }
