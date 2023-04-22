@@ -30,13 +30,18 @@ public class Cache{
     }
     
     public void apilar(String[] entrada){
-        Busqueda busqueda=new Busqueda(Integer.parseInt(entrada[0]),entrada[1]);
-        Pila resultadoDeBusqueda=Googolplex.programa.getDocumentosMasBuscados().encontrarTodoDocumentoQueCalce(entrada[1].toLowerCase());
-        CacheNode nuevo = new CacheNode(busqueda,resultadoDeBusqueda);
-        if (isEmpty()) {cima=nuevo;}
-        else {
-            nuevo.setSiguiente(cima);
-            cima = nuevo;
+        try{
+            Busqueda busqueda=new Busqueda(Integer.parseInt(entrada[0]),entrada[1]);
+            Pila resultadoDeBusqueda=Googolplex.programa.getDocumentosMasBuscados().encontrarTodoDocumentoQueCalce(entrada[1].toLowerCase());
+            CacheNode nuevo = new CacheNode(busqueda,resultadoDeBusqueda);
+            if (isEmpty()) {cima=nuevo;}
+            else {
+                nuevo.setSiguiente(cima);
+                cima = nuevo;
+            }
+        }catch(IndexOutOfBoundsException e){
+            System.err.println("Busqueda vacia. Ignorada.");
+            return;
         }
     }
     

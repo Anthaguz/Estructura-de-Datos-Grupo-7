@@ -259,7 +259,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Reiniciar interfaz"/>
+                <Property name="text" type="java.lang.String" value="Reiniciar busqueda"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
                     <BevelBorder/>
@@ -369,7 +369,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtboxSearchContents">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Presione buscar para actualizar la busqueda"/>
+            <Property name="toolTipText" type="java.lang.String" value="Solo funciona en documentos a&#xf1;adidos en esta sesion."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtboxSearchContentsActionPerformed"/>
@@ -399,7 +399,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtboxSearchComplex">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Presione buscar para actualizar la busqueda"/>
+            <Property name="toolTipText" type="java.lang.String" value="Solo funciona en documentos a&#xf1;adidos en esta sesion."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtboxSearchComplexActionPerformed"/>

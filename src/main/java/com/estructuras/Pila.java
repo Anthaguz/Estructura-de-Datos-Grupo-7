@@ -1,6 +1,12 @@
 //Github: https://github.com/Anthaguz/Estructura-de-Datos-Grupo-7
 package com.estructuras;
 
+import com.googolplex.Googolplex;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,6 +121,25 @@ public class Pila {
         }
     }
 
+    
+    public void calzanBusquedaCompleja(String[] busqueda){
+        Nodo aux =cima;
+        while(aux!=null){
+            File folderArchivos=new File(
+                            Googolplex.programa.getPathRelativoDelPrograma()+
+                            Googolplex.programa.getPathRelativoDeLosDocumentos()+
+                            aux.getDocumento().getNombre());
+            try (BufferedReader reader = new BufferedReader(new FileReader(folderArchivos))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] palabrasDeLinea = linea.split(",");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
     
 //    public boolean encontrarNumero(int numero){
 //        if(esVacia()){return false;}

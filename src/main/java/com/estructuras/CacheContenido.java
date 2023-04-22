@@ -105,12 +105,13 @@ public class CacheContenido{
             try (BufferedReader reader = new BufferedReader(lector)) {
                 String linea;
                 while ((linea = reader.readLine()) != null) {
-                    String[] palabras = linea.split("\\s*(\\s|,|\\.)\\s*");
+                    String regex = "[\\s\\p{Punct}]+";
+                    String[] palabras = linea.split(regex);
                     for(String palabra:palabras){
                         if(palabra.toLowerCase().equals("to".toLowerCase())){
                             counter++;
                         }
-                        resultado.add(palabra);
+                        resultado.add(palabra.toLowerCase());
                     }
                 }
                 Collections.sort(resultado);
@@ -162,9 +163,6 @@ public class CacheContenido{
                 cima = nuevo;
             }
         }
-        System.out.println("asd");
-
-//    }
     }
     
     public CacheNodeContenido existePalabra(String busqueda){

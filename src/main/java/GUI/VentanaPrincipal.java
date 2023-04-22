@@ -95,6 +95,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 accionBtnSearch();
             }
         });
+        txtboxSearchContents.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                accionBtnSearchContent();
+            }
+        });
+        txtboxSearchComplex.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                accionBtnSeachComplex();
+            }
+        });
+        
     }
 
     /**
@@ -172,7 +185,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         btnActualizar.setBackground(new java.awt.Color(20, 128, 216));
         btnActualizar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnActualizar.setText("Reiniciar interfaz");
+        btnActualizar.setText("Reiniciar busqueda");
         btnActualizar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnActualizar.setFocusable(false);
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -241,7 +254,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         busquedaNecesitaRefresh.setText("Presione enter o el boton buscar para actualizar los resultados");
 
-        txtboxSearchContents.setToolTipText("Presione buscar para actualizar la busqueda");
+        txtboxSearchContents.setToolTipText("Solo funciona en documentos añadidos en esta sesion.");
         txtboxSearchContents.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtboxSearchContentsActionPerformed(evt);
@@ -264,7 +277,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        txtboxSearchComplex.setToolTipText("Presione buscar para actualizar la busqueda");
+        txtboxSearchComplex.setToolTipText("Solo funciona en documentos añadidos en esta sesion.");
         txtboxSearchComplex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtboxSearchComplexActionPerformed(evt);
@@ -331,6 +344,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(44, 44, 44))
         );
 
+        txtboxSearchContents.getAccessibleContext().setAccessibleDescription("Solo funciona en documentos añadidos en esta sesion.");
+        txtboxSearchComplex.getAccessibleContext().setAccessibleDescription("Solo funciona en documentos añadidos en esta sesion.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -370,6 +386,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         llenarTabla();
         txtboxSearchName.setText("");
+        txtboxSearchContents.setText("");
+        txtboxSearchComplex.setText("");
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void cbbxModoDeOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbxModoDeOrdenActionPerformed
@@ -440,6 +458,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchNameActionPerformed
 
     private void accionBtnSearch(){
+        if (txtboxSearchName.getText().toLowerCase().equals("")||txtboxSearchName.getText().toLowerCase().equals(" ")){
+            llenarTabla();
+            return;
+        }
         Pila paraPonerEnTabla=new Pila();
         try{
             
@@ -471,7 +493,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     private void accionBtnSearchContent(){
-        
+        if (txtboxSearchContents.getText().toLowerCase().equals("")||txtboxSearchContents.getText().toLowerCase().equals(" ")){
+            llenarTabla();
+            return;
+        }
         CacheNodeContenido temp=Googolplex.programa.getCacheContenido().existePalabra(txtboxSearchContents.getText());
         if(temp==null){
             DefaultTableModel modelo = (DefaultTableModel) tablaDocumentos.getModel();
@@ -517,14 +542,41 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtboxSearchContentsActionPerformed
 
+    // Buscar en contenido palabras indivicuales
     private void btnSearchContentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchContentActionPerformed
         accionBtnSearchContent();
     }//GEN-LAST:event_btnSearchContentActionPerformed
 
+    // Buscar en contenido frases complejas
     private void btnSearchComplexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchComplexActionPerformed
-        // TODO add your handling code here:
+        accionBtnSeachComplex();
     }//GEN-LAST:event_btnSearchComplexActionPerformed
 
+    private void accionBtnSeachComplex(){
+        if (txtboxSearchComplex.getText().toLowerCase().equals("") || txtboxSearchComplex.getText().toLowerCase().equals(" ")){
+            llenarTabla();
+            return;
+        }
+        String regex = "[\\p{Punct}\\s]+";
+        String[] busqueda = txtboxSearchComplex.getText().split(regex);
+        boolean busquedaValida=false;
+        for (String palabra:busqueda){
+            if(Googolplex.programa.getCacheContenido().existePalabra(palabra)!=null){
+                busquedaValida=true;
+            }
+        }
+        if(busquedaValida==false){
+            JOptionPane.showMessageDialog(null, "La busqueda no obtuvo resultados");
+            return;
+        }else{
+            JOptionPane.showMessageDialog(null, "La busqueda si obtuvo resultados");
+        }
+        List<Documento> documentos = new ArrayList<>();
+        Pila documentosPila= Googolplex.programa.getCacheContenido().existePalabra(busqueda[0]).getPilaDeDocumentosParaTabla();
+        
+        return;
+    }
+    
     private void txtboxSearchComplexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtboxSearchComplexActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtboxSearchComplexActionPerformed
