@@ -3,6 +3,7 @@
 package com.googolplex;
 
 import GUI.VentanaPrincipal;
+import com.estructuras.Arbol;
 import com.estructuras.Cache;
 import com.estructuras.CacheContenido;
 import com.estructuras.Cola;
@@ -31,6 +32,7 @@ import javax.swing.JOptionPane;
     private final String pathRelativoDelPrograma;
     private final String pathRelativoDeLosDocumentos;    
     private final String pathDeRegistros;    
+    private Arbol favoritos;
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Getters">  
@@ -41,6 +43,7 @@ import javax.swing.JOptionPane;
     public Pila getDocumentosMasBuscados() {return documentosMasBuscados;}
     public Cache getCacheDeBusquedas() {return cacheDeBusquedas;}
     public CacheContenido getCacheContenido(){return cacheDeContenido;}
+    public Arbol getFavoritos(){return favoritos;}
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="No hay Setters">
@@ -54,6 +57,7 @@ import javax.swing.JOptionPane;
         this.pathDeRegistros="/src/main/java/registros/";
         this.cacheDeBusquedas=new Cache();
         this.cacheDeContenido=new CacheContenido();
+        this.favoritos=new Arbol();
     }
     //</editor-fold>
     

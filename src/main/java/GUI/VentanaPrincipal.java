@@ -140,6 +140,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnSearchContent = new javax.swing.JButton();
         btnSearchComplex = new javax.swing.JButton();
         txtboxSearchComplex = new javax.swing.JTextField();
+        btnFavoritos = new javax.swing.JButton();
+        inorden = new javax.swing.JButton();
+        btnPreorden = new javax.swing.JButton();
+        btnPostorden = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Googolplex");
@@ -284,36 +288,75 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnFavoritos.setText("Añadir a favoritos");
+        btnFavoritos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFavoritosActionPerformed(evt);
+            }
+        });
+
+        inorden.setText("Inorden");
+        inorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inordenActionPerformed(evt);
+            }
+        });
+
+        btnPreorden.setText("Preorden");
+        btnPreorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreordenActionPerformed(evt);
+            }
+        });
+
+        btnPostorden.setText("Postorden");
+        btnPostorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPostordenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnSearchComplex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtboxSearchComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnSearchContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPostorden, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtboxSearchContents, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(busquedaNecesitaRefresh)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnSearchName, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                                .addComponent(btnAbrirArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtboxSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPreorden, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inorden, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFavoritos, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(32, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnSearchComplex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtboxSearchComplex, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnSearchContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtboxSearchContents, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(busquedaNecesitaRefresh)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(cbbxModoDeOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(btnSearchName, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                                        .addComponent(btnAbrirArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txtboxSearchName, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(cbbxModoDeOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -339,13 +382,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(txtboxSearchComplex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(busquedaNecesitaRefresh)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
-                .addGap(44, 44, 44))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFavoritos)
+                    .addComponent(inorden)
+                    .addComponent(btnPreorden)
+                    .addComponent(btnPostorden))
+                .addGap(24, 24, 24))
         );
-
-        txtboxSearchContents.getAccessibleContext().setAccessibleDescription("Solo funciona en documentos añadidos en esta sesion.");
-        txtboxSearchComplex.getAccessibleContext().setAccessibleDescription("Solo funciona en documentos añadidos en esta sesion.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -416,8 +462,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         int lineaSeleccionada = tablaDocumentos.getSelectedRow();
         int numeroDeDocumento = -1;
         if (lineaSeleccionada == -1) {
-            //JOptionPane.showMessageDialog(null, "Error: El documento no se encontro.", "Error", JOptionPane.ERROR_MESSAGE);
-            //return;
             lineaSeleccionada=0;
         }
         if (lineaSeleccionada != -1) {
@@ -504,33 +548,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             return;
         }
         Pila paraPonerEnTabla=temp.getPilaDeDocumentosParaTabla();
-//        Pila paraPonerEnTabla=new Pila();
-//        try{
-//
-//            if(Googolplex.programa.getCacheDeBusquedas().existeBusquedaReciente(txtboxSearchName.getText().toLowerCase())){
-//                Busqueda busqueda=Googolplex.programa.getCacheDeBusquedas().getBusqueda(txtboxSearchName.getText().toLowerCase());
-//                Googolplex.programa.getCacheDeBusquedas().modificarBusquedaAnterior(busqueda);
-//                paraPonerEnTabla=Googolplex.programa.getCacheDeBusquedas().getResultado(busqueda.getKeyword());
-//    //                JOptionPane.showMessageDialog(rootPane, "Se encontro la busqueda", "Error", JOptionPane.ERROR_MESSAGE);
-//            }else{
-//    //                JOptionPane.showMessageDialog(rootPane, "La busqueda se hizo por primera vez", "Error", JOptionPane.ERROR_MESSAGE);
-//                String busqueda="0,"+txtboxSearchName.getText().toLowerCase();
-//                Googolplex.programa.getCacheDeBusquedas().apilar(busqueda.split(","));
-//                Busqueda busqueda1=Googolplex.programa.getCacheDeBusquedas().getBusqueda(txtboxSearchName.getText().toLowerCase());
-//                paraPonerEnTabla=Googolplex.programa.getCacheDeBusquedas().getResultado(busqueda1.getKeyword());
-//            }
-//        }catch(NullPointerException e){
-//            JOptionPane.showMessageDialog(rootPane, "El cache esta nulo", "Error", JOptionPane.ERROR_MESSAGE);
-//            String busqueda="0,"+txtboxSearchName.getText();
-//            Googolplex.programa.getCacheDeBusquedas().apilar(busqueda.split(","));
-//        } 
-//
-//
         DefaultTableModel modelo = (DefaultTableModel) tablaDocumentos.getModel();
         modelo.setRowCount(0);
         List<String[]> documentosPorBusquedas=paraPonerEnTabla.imprimirPila();
         for(String[] row:documentosPorBusquedas){
-           modelo.addRow(row);
+            modelo.addRow(row);
         }
     }
     
@@ -566,20 +588,57 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         }
         if(busquedaValida==false){
-            JOptionPane.showMessageDialog(null, "La busqueda no obtuvo resultados");
+            DefaultTableModel modelo = (DefaultTableModel) tablaDocumentos.getModel();
+            modelo.setRowCount(0);
             return;
-        }else{
-            JOptionPane.showMessageDialog(null, "La busqueda si obtuvo resultados");
         }
-        List<Documento> documentos = new ArrayList<>();
         Pila documentosPila= Googolplex.programa.getCacheContenido().existePalabra(busqueda[0]).getPilaDeDocumentosParaTabla();
-        
+        DefaultTableModel modelo = (DefaultTableModel) tablaDocumentos.getModel();
+        modelo.setRowCount(0);
+        List<String[]> documentosPorBusquedas=documentosPila.imprimirPila();
+        for(String[] row:documentosPorBusquedas){
+            modelo.addRow(row);
+        }
         return;
     }
     
     private void txtboxSearchComplexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtboxSearchComplexActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtboxSearchComplexActionPerformed
+
+    private void btnFavoritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFavoritosActionPerformed
+        int lineaSeleccionada = tablaDocumentos.getSelectedRow();
+        int numeroDeDocumento = -1;
+        if (lineaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(null, "Error: Seleccione un documento.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (lineaSeleccionada != -1) {
+            try{
+                Object contenidoDeLinea = tablaDocumentos.getModel().getValueAt(lineaSeleccionada, 0);
+                numeroDeDocumento = Integer.parseInt(contenidoDeLinea.toString());
+                
+            }catch(ArrayIndexOutOfBoundsException e){
+                JOptionPane.showMessageDialog(null, "Error: Aun no se han insertado documentos.", "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+                return;
+            }
+        }
+        Documento paraFavorito = Googolplex.programa.getDocumentosRegistrados().encontrarPorNumeroDeDocumento(numeroDeDocumento);
+        Googolplex.programa.getFavoritos().inserta(paraFavorito);
+        return;
+    }//GEN-LAST:event_btnFavoritosActionPerformed
+
+    private void inordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inordenActionPerformed
+        Googolplex.programa.getFavoritos().inorden();
+    }//GEN-LAST:event_inordenActionPerformed
+
+    private void btnPreordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreordenActionPerformed
+        Googolplex.programa.getFavoritos().preorden();
+    }//GEN-LAST:event_btnPreordenActionPerformed
+
+    private void btnPostordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPostordenActionPerformed
+        Googolplex.programa.getFavoritos().postorden();
+    }//GEN-LAST:event_btnPostordenActionPerformed
 
     private void buscar(){
         String search=txtboxSearchName.getText();
@@ -643,6 +702,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnDocumentoExistente;
     private javax.swing.JButton btnDocumentoNuevo;
+    private javax.swing.JButton btnFavoritos;
+    private javax.swing.JButton btnPostorden;
+    private javax.swing.JButton btnPreorden;
     private javax.swing.JButton btnSearchComplex;
     private javax.swing.JButton btnSearchContent;
     private javax.swing.JButton btnSearchName;
@@ -652,6 +714,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.Box.Filler filler11;
     private javax.swing.Box.Filler filler12;
     private javax.swing.Box.Filler filler2;
+    private javax.swing.JButton inorden;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
